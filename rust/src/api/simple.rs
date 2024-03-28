@@ -43,7 +43,7 @@ async fn create_database(path: &str) {
 async fn create_table(table_name: &str, pool: &Pool<Sqlite>) {
     let sql = format!("CREATE TABLE {} (id INTEGER PRIMARY KEY, name TEXT NOT NULL);", &table_name);
     match sqlx::query(&sql).execute(pool).await {
-        Ok(result) => panic!("sql executed {:?}. table name: {}", result, &table_name),
+        Ok(_) => return,
         Err(error) => panic!("fail to execute sql. Error: {}", error),
     }
 }
